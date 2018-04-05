@@ -2,7 +2,7 @@
 #
 # Version 2.00
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Rick Scherer
 
 VOLUME /downloads

@@ -1,7 +1,7 @@
-version: '2'
+version: '1'
 services:
  transmission:
-  image: rickscherer/transmission-sabnzbd-openvpn
+  image: bug11/docker-transmission-sabnzbd-openvpn
   privileged: true
   restart: always
   ports:
@@ -15,8 +15,8 @@ services:
     - /etc/localtime:/etc/localtime:ro
     - /your/storage/path/:/downloads
   environment:
-    - OPENVPN_PROVIDER=PIA
+    - OPENVPN_PROVIDER=USENETSERVER
     - OPENVPN_USERNAME=username
     - OPENVPN_PASSWORD=password
     - OPENVPN_OPTS="--inactive 3600 --ping 10 --ping-exit 60"
-    - LOCAL_NETWORK=192.168.2.0/24
+    - LOCAL_NETWORK=192.168.1.0/24

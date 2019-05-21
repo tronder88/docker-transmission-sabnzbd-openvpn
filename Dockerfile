@@ -1,9 +1,9 @@
 # Transmission, SABnzbd and OpenVPN
 #
-# Version 2.00
+# Version 1.00
 
-FROM ubuntu:16.04
-MAINTAINER Rick Scherer
+FROM ubuntu:18.04
+MAINTAINER Bug11
 
 VOLUME /downloads
 VOLUME /config
@@ -18,11 +18,11 @@ RUN apt-get update \
     && apt-get install -y transmission-cli transmission-common transmission-daemon \
     && apt-get install -y sabnzbdplus \
     && apt-get install -y openvpn curl rar unrar zip unzip wget \
-    && curl -sLO https://github.com/Yelp/dumb-init/releases/download/v1.0.1/dumb-init_1.0.1_amd64.deb \
+    && curl -sLO https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb \
     && dpkg -i dumb-init_*.deb \
     && rm -rf dumb-init_*.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && curl -L https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-v0.0.2.tar.gz | tar -C /usr/local/bin -xzv \
+    && curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz | tar -C /usr/local/bin -xzv \
     && groupmod -g 1000 users \
     && useradd -u 911 -U -d /config -s /bin/false abc \
     && usermod -G users abc \

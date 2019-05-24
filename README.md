@@ -1,12 +1,35 @@
 # Transmission with WebUI, SABnzbd and OpenVPN
 Docker container which runs Transmission torrent client with WebUI and SABnzbd while connecting to OpenVPN.
-It bundles certificates and configurations for the following VPN provider:
+It bundles certificates and configurations for the following VPN providers:
 
 | Provider Name                | Config Value |
 |:-----------------------------|:-------------|
-
+| Anonine | `ANONINE` |
+| BTGuard | `BTGUARD` |
+| Cryptostorm | `CRYPTOSTORM` |
+| FrootVPN | `FROOT` |
+| FrostVPN | `FROSTVPN` |
+| HideMe | `HIDEME` |
+| HideMyAss | `HIDEMYASS` |
+| IntegrityVPN | `INTEGRITYVPN` |
+| IPVanish | `IPVANISH` |
+| Ivacy | `IVACY` |
+| IVPN | `IVPN` |
+| Newshosting | `NEWSHOSTING` |
+| NordVPN | `NORDVPN` |
+| OVPN | `OVPN` |
+| Private Internet Access | `PIA` |
+| PrivateVPN | `PRIVATEVPN` |
+| PureVPN | `PUREVPN` |
+| SlickVPN | `SLICKVPN` |
+| SmartVPN | `SMARTVPN` |
+| TigerVPN | `TIGER` |
+| TorGuard | `TORGUARD` |
 | UsenetServerVPN | `USENETSERVER` |
+| Windscribe | `WINDSCRIBE` |
+| VPN.ht | `VPNHT` |
 
+When using PIA as provider it will update Transmission hourly with assigned open port. Please read the instructions below.
 
 ## Run container from Docker registry
 The container is available from the Docker registry and this is the simplest way to get it.
@@ -92,7 +115,7 @@ $ docker run --privileged  -d --name CONTAINER_NAME \
               -v /etc/localtime:/etc/localtime:ro \
               -env-file /your/docker/env/file \
               -p 9091:9091 -p 8081:8081 -p 9090:9090 \
-              bug11/transmission-sabnzbd-openvpn
+              rickscherer/transmission-sabnzbd-openvpn
 ```
 
 ## Access the WebUI
@@ -101,7 +124,7 @@ This is because the VPN is active, and since docker is running in a different ip
 to your request will be treated as "non-local" traffic and therefore be routed out through the VPN interface.
 
 ### How to fix this
-The container supports the `LOCAL_NETWORK` environment variable. For instance if your local network uses the IP range 192.168.1.0/24 you would pass `-e LOCAL_NETWORK=192.168.1.0/24`. 
+The container supports the `LOCAL_NETWORK` environment variable. For instance if your local network uses the IP range 192.168.0.0/24 you would pass `-e LOCAL_NETWORK=192.168.0.0/24`. 
 
 Alternatively you can reverse proxy the traffic through another container, as that container would be in the docker range. There is a reverse proxy being built with the container. You can run it using the command below or have a look in the repository proxy folder for inspiration for your own custom proxy.
 
@@ -212,7 +235,7 @@ OpenVPN is set to exit if there is a connection failure. OpenVPN exiting trigger
 
 ```
 [Unit]
-Description=bug11/transmission-sabnzbd-openvpn docker container
+Description=rickscherer/transmission-sabnzbd-openvpn docker container
 After=docker.service
 Requires=docker.service
 

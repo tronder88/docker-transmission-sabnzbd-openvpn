@@ -17,7 +17,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y transmission-cli transmission-common transmission-daemon \
     && apt-get install -y sabnzbdplus \
-    && apt-get install -y openvpn curl rar unrar zip unzip wget \
+    && apt-get install -y openvpn curl rar unrar zip unzip wget sudo \
     && curl -sLO https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb \
     && dpkg -i dumb-init_*.deb \
     && rm -rf dumb-init_*.deb \
